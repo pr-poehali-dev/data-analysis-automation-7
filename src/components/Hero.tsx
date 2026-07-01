@@ -40,9 +40,19 @@ export default function Hero() {
           Вас ждёт увлекательный игровой процесс с элементами ролевой игры.<br />
           Территории, бои, покупка домов и машин — заходи и покажи, на что ты способен!
         </p>
-        <button className="bg-red-600 hover:bg-red-700 text-white font-bold uppercase tracking-widest px-10 py-4 text-sm transition-all duration-300 cursor-pointer">
-          Присоединяйся к нам
-        </button>
+        <div className="flex items-center gap-6 flex-wrap">
+          <button className="bg-red-600 hover:bg-red-700 text-white font-bold uppercase tracking-widest px-10 py-4 text-sm transition-all duration-300 cursor-pointer">
+            Присоединяйся к нам
+          </button>
+          <a
+            href="https://maiami-gta-forum.sampproject.ru"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-400 hover:text-blue-300 font-bold uppercase tracking-widest text-sm transition-colors duration-300"
+          >
+            Наш Форум
+          </a>
+        </div>
       </div>
     </div>
   );
