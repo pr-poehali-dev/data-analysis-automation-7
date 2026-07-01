@@ -45,7 +45,7 @@ export default function Hero() {
             Присоединяйся к нам
           </button>
           <a
-            href="https://maiami-gta-forum.sampproject.ru"
+            href="https://maiami-gta-forum.sampproject.ru/index.php"
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-400 hover:text-blue-300 font-bold uppercase tracking-widest text-sm transition-colors duration-300"
