@@ -13,8 +13,8 @@ const cards = [
   {
     title: "НА ЛИДЕРА",
     description: "Подать заявку на пост лидера выбранной фракции: государственные структуры, СМИ, ОПГ или военная часть.",
-    badge: "ЗАКРЫТО",
-    badgeColor: "text-yellow-400 border-yellow-400",
+    badge: "ОТКРЫТО",
+    badgeColor: "text-green-400 border-green-400",
     titleColor: "text-yellow-400",
     icon: "Crown",
     iconColor: "text-yellow-400",
@@ -22,8 +22,8 @@ const cards = [
   {
     title: "НА ВОССТАНОВЛЕНИЕ",
     description: "Подать заявку на восстановление в должности. Только для бывших администраторов сервера Maiami RP.",
-    badge: "ЗАКРЫТО",
-    badgeColor: "text-blue-400 border-blue-400",
+    badge: "ОТКРЫТО",
+    badgeColor: "text-green-400 border-green-400",
     titleColor: "text-blue-400",
     icon: "RotateCcw",
     iconColor: "text-blue-400",
