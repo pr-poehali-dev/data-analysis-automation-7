@@ -26,6 +26,9 @@ export default function Hero() {
       </motion.div>
 
       <div className="relative z-10 text-center text-white px-6">
+        <p className="text-sm md:text-base max-w-2xl mx-auto opacity-80 mb-6 uppercase tracking-widest">
+          Вас ждёт увлекательный игровой процесс с элементами ролевой игры. Территории, захватывающие бои, покупка домов и машин — играйте с друзьями и наслаждайтесь!
+        </p>
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 max-w-5xl mx-auto leading-tight">
           Присоединяйся к нам прямо сейчас
         </h1>
