@@ -41,9 +41,14 @@ export default function Hero() {
           Территории, бои, покупка домов и машин — заходи и покажи, на что ты способен!
         </p>
         <div className="flex items-center gap-6 flex-wrap">
-          <button className="bg-red-600 hover:bg-red-700 text-white font-bold uppercase tracking-widest px-10 py-4 text-sm transition-all duration-300 cursor-pointer">
+          <a
+            href="https://drive.google.com/file/d/1NonnQtUu3X1ZCGe3BQ2h-U2KAv8sfUdR/view?usp=drivesdk"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-red-600 hover:bg-red-700 text-white font-bold uppercase tracking-widest px-10 py-4 text-sm transition-all duration-300 cursor-pointer inline-block"
+          >
             Присоединяйся к нам
-          </button>
+          </a>
           <a
             href="https://maiami-gta-forum.sampproject.ru/index.php"
             target="_blank"
