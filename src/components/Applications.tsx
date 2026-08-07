@@ -24,12 +24,13 @@ const cards = [
   {
     title: "НА ВОССТАНОВЛЕНИЕ",
     description: "Подать заявку на восстановление в должности. Только для бывших администраторов сервера Maiami RP.",
-    badge: "ОТКРЫТО",
-    badgeColor: "text-green-400 border-green-400",
+    badge: "ЗАКРЫТО ДО 10.09.2026",
+    badgeColor: "text-red-400 border-red-400",
     titleColor: "text-blue-400",
     icon: "RotateCcw",
     iconColor: "text-blue-400",
-    href: "https://maiami-gta-forum.sampproject.ru/index.php?threads/%D0%92%D0%BE%D1%81%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BD%D0%B0-%D0%BF%D0%BE%D1%81%D1%82-%D0%90%D0%B4%D0%BC%D0%B8%D0%BD%D0%B8%D1%81%D1%82%D1%80%D0%B0%D1%82%D0%BE%D1%80%D0%B0.67/",
+    href: "",
+    closed: true,
   },
 ];
 
@@ -76,14 +77,20 @@ export default function Applications() {
               {card.description}
             </p>
 
-            <a
-              href={card.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`text-sm uppercase tracking-widest font-bold transition-opacity duration-300 hover:opacity-70 text-left ${card.titleColor}`}
-            >
-              Подать заявку »
-            </a>
+            {card.closed ? (
+              <span className="text-sm uppercase tracking-widest font-bold text-neutral-600 cursor-not-allowed">
+                Приём заявок закрыт
+              </span>
+            ) : (
+              <a
+                href={card.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`text-sm uppercase tracking-widest font-bold transition-opacity duration-300 hover:opacity-70 text-left ${card.titleColor}`}
+              >
+                Подать заявку »
+              </a>
+            )}
 
             <div className="absolute bottom-0 right-0 w-12 h-12 opacity-20"
               style={{ background: `linear-gradient(135deg, transparent 50%, currentColor 50%)` }}
