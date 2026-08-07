@@ -2,6 +2,14 @@ import Icon from "@/components/ui/icon";
 
 const news = [
   {
+    date: "05.05.2024",
+    title: "Открытие проекта Maiami RP",
+    description: "Сервер официально открыл свои двери для игроков! Добро пожаловать в город, где начинается твоя история.",
+    icon: "Rocket",
+    tag: "Открытие",
+    tagColor: "text-green-400 border-green-400",
+  },
+  {
     date: "05.08.2026",
     title: "Обновление 3.2: новые фракции",
     description: "Добавлены две новые государственные фракции и обновлена система назначения лидеров.",
@@ -43,7 +51,7 @@ export default function News() {
         ОБНОВЛЕНИЯ
       </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-6xl">
         {news.map((item) => (
           <div
             key={item.title}
