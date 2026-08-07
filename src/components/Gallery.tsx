@@ -3,27 +3,27 @@ import Icon from "@/components/ui/icon";
 
 const screenshots = [
   {
-    src: "https://cdn.poehali.dev/projects/d8103abd-0f83-4992-841c-f7e17ff33ad2/files/8b5a55ce-9da8-4a8e-93fb-e4a0d84c115b.jpg",
-    title: "Ночной город",
+    src: "https://cdn.poehali.dev/projects/d8103abd-0f83-4992-841c-f7e17ff33ad2/files/6cd0ca83-d748-4015-8534-70a08da72427.jpg",
+    title: "Городская улица",
   },
   {
-    src: "https://cdn.poehali.dev/projects/d8103abd-0f83-4992-841c-f7e17ff33ad2/files/29fab4b0-fb96-480e-8a01-a084594c36b3.jpg",
-    title: "Набережная",
+    src: "https://cdn.poehali.dev/projects/d8103abd-0f83-4992-841c-f7e17ff33ad2/files/1c1ed50e-ffcb-451f-bd41-ff66eb8089fb.jpg",
+    title: "Пустынное шоссе",
   },
   {
-    src: "https://cdn.poehali.dev/projects/d8103abd-0f83-4992-841c-f7e17ff33ad2/files/6422ab81-ef0f-4a08-b701-252ee5d59693.jpg",
-    title: "Вилла",
+    src: "https://cdn.poehali.dev/projects/d8103abd-0f83-4992-841c-f7e17ff33ad2/files/29bde185-8106-4a4c-90e2-15a9c10a9c1a.jpg",
+    title: "Ранчо",
   },
   {
-    src: "https://cdn.poehali.dev/projects/d8103abd-0f83-4992-841c-f7e17ff33ad2/files/c662e63e-7707-4e73-a5e3-fc65a8dd990c.jpg",
+    src: "https://cdn.poehali.dev/projects/d8103abd-0f83-4992-841c-f7e17ff33ad2/files/23f254be-9942-4f3c-9239-e4adfd7649ff.jpg",
     title: "Погоня",
   },
   {
-    src: "https://cdn.poehali.dev/projects/d8103abd-0f83-4992-841c-f7e17ff33ad2/files/d56c2014-cb3d-4291-b9bd-73faa4620974.jpg",
+    src: "https://cdn.poehali.dev/projects/d8103abd-0f83-4992-841c-f7e17ff33ad2/files/e1cd80e8-b128-4531-9288-4d303100b02e.jpg",
     title: "Автомобильная тусовка",
   },
   {
-    src: "https://cdn.poehali.dev/projects/d8103abd-0f83-4992-841c-f7e17ff33ad2/files/79f2944b-c155-44b4-9ead-5b24b5d641ed.jpg",
+    src: "https://cdn.poehali.dev/projects/d8103abd-0f83-4992-841c-f7e17ff33ad2/files/e3d31b64-f8b2-4288-b8b1-3a095b2ad3de.jpg",
     title: "Панорама города",
   },
 ];
