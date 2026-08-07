@@ -32,7 +32,7 @@ export default function Gallery() {
   const [active, setActive] = useState<number | null>(null);
 
   return (
-    <div className="bg-neutral-950 px-6 py-24 flex flex-col items-center">
+    <div id="gallery" className="bg-neutral-950 px-6 py-24 flex flex-col items-center">
       <p className="text-red-500 uppercase tracking-widest text-xs mb-4 flex items-center gap-2">
         <span className="w-8 h-px bg-red-500 inline-block" />
         Скриншоты игрового процесса
