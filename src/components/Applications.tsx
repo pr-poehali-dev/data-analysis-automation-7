@@ -1,5 +1,8 @@
 import Icon from "@/components/ui/icon";
 
+const REOPEN_DATE = new Date("2026-09-10T00:00:00");
+const isReopened = new Date() >= REOPEN_DATE;
+
 const cards = [
   {
     title: "НА АДМИНИСТРАТОРА",
@@ -24,13 +27,13 @@ const cards = [
   {
     title: "НА ВОССТАНОВЛЕНИЕ",
     description: "Подать заявку на восстановление в должности. Только для бывших администраторов сервера Maiami RP.",
-    badge: "ЗАКРЫТО ДО 10.09.2026",
-    badgeColor: "text-red-400 border-red-400",
+    badge: isReopened ? "ОТКРЫТО" : "ЗАКРЫТО ДО 10.09.2026",
+    badgeColor: isReopened ? "text-green-400 border-green-400" : "text-red-400 border-red-400",
     titleColor: "text-blue-400",
     icon: "RotateCcw",
     iconColor: "text-blue-400",
-    href: "",
-    closed: true,
+    href: "https://maiami-gta-forum.sampproject.ru/index.php?threads/%D0%92%D0%BE%D1%81%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BD%D0%B0-%D0%BF%D0%BE%D1%81%D1%82-%D0%90%D0%B4%D0%BC%D0%B8%D0%BD%D0%B8%D1%81%D1%82%D1%80%D0%B0%D1%82%D0%BE%D1%80%D0%B0.67/",
+    closed: !isReopened,
   },
 ];
 
