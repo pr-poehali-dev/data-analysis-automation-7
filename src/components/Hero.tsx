@@ -42,7 +42,7 @@ export default function Hero() {
         </p>
         <div className="flex items-center gap-6 flex-wrap">
           <a
-            href="https://drive.google.com/file/d/1NonnQtUu3X1ZCGe3BQ2h-U2KAv8sfUdR/view?usp=drivesdk"
+            href="https://drive.usercontent.google.com/download?id=1IDS9D_kPUWDM-4fhTz5CsJazFo3SXkXF&export=download&authuser=0&confirm=t&uuid=5c2c5089-0590-445d-bc4e-b5045a389e89&at=AMrWOn1POhNzuaOtllY2wnngjqtm%3A1791194748645"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-red-600 hover:bg-red-700 text-white font-bold uppercase tracking-widest px-10 py-4 text-sm transition-all duration-300 cursor-pointer inline-block"
