@@ -1,6 +1,7 @@
 import { useScroll, useTransform, motion } from "framer-motion";
 import { useRef } from "react";
 import { useContent } from "@/lib/content";
+import CopyIp from "@/components/CopyIp";
 
 export default function Hero() {
   const { data } = useContent();
@@ -45,9 +46,12 @@ export default function Hero() {
           Вас ждёт увлекательный игровой процесс с элементами ролевой игры.<br />
           Территории, бои, покупка домов и машин — заходи и покажи, на что ты способен!
         </p>
-        <p className="text-white/80 text-sm uppercase tracking-widest mb-6">
-          IP сервера: <span className="text-white font-bold select-all">{serverIp}</span>
-        </p>
+        <div className="flex items-center gap-3 flex-wrap mb-6">
+          <p className="text-white/80 text-sm uppercase tracking-widest">
+            IP сервера: <span className="text-white font-bold select-all">{serverIp}</span>
+          </p>
+          <CopyIp ip={serverIp} />
+        </div>
         <div className="flex items-center gap-6 flex-wrap">
           <a
             href={downloadUrl}

@@ -1,4 +1,5 @@
 import Icon from "@/components/ui/icon";
+import { useContent } from "@/lib/content";
 
 const cards = [
   {
@@ -9,7 +10,7 @@ const cards = [
     titleColor: "text-red-500",
     icon: "Shield",
     iconColor: "text-red-400",
-    href: "https://maiami-gta-forum.sampproject.ru/index.php?threads/%D0%97%D0%B0%D1%8F%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BD%D0%B0-%D0%BF%D0%BE%D1%81%D1%82-%D0%B0%D0%B4%D0%BC%D0%B8%D0%BD%D0%B8%D1%81%D1%82%D1%80%D0%B0%D1%82%D0%BE%D1%80%D0%B0.8/",
+    settingKey: "admin_apply_url" as const,
   },
   {
     title: "НА ЛИДЕРА",
@@ -19,7 +20,7 @@ const cards = [
     titleColor: "text-yellow-400",
     icon: "Crown",
     iconColor: "text-yellow-400",
-    href: "https://maiami-gta-forum.sampproject.ru/index.php?forums/%D0%97%D0%B0%D1%8F%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F-%D0%BD%D0%B0-%D0%BF%D0%BE%D1%81%D1%82-%D0%BB%D0%B8%D0%B4%D0%B5%D1%80%D0%B0.21/",
+    settingKey: "leader_apply_url" as const,
   },
   {
     title: "НА ВОССТАНОВЛЕНИЕ",
@@ -29,11 +30,13 @@ const cards = [
     titleColor: "text-blue-400",
     icon: "RotateCcw",
     iconColor: "text-blue-400",
-    href: "https://maiami-gta-forum.sampproject.ru/index.php?threads/%D0%92%D0%BE%D1%81%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BD%D0%B0-%D0%BF%D0%BE%D1%81%D1%82-%D0%90%D0%B4%D0%BC%D0%B8%D0%BD%D0%B8%D1%81%D1%82%D1%80%D0%B0%D1%82%D0%BE%D1%80%D0%B0.67/",
+    settingKey: "restore_apply_url" as const,
   },
 ];
 
 export default function Applications() {
+  const { data } = useContent();
+
   return (
     <div className="min-h-screen bg-neutral-950 px-6 py-24 flex flex-col items-center">
       <p className="text-red-500 uppercase tracking-widest text-xs mb-4 flex items-center gap-2">
@@ -77,7 +80,7 @@ export default function Applications() {
             </p>
 
             <a
-              href={card.href}
+              href={data?.settings[card.settingKey] ?? "#"}
               target="_blank"
               rel="noopener noreferrer"
               className={`text-sm uppercase tracking-widest font-bold transition-opacity duration-300 hover:opacity-70 text-left ${card.titleColor}`}

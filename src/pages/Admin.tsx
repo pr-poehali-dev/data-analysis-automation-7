@@ -61,6 +61,9 @@ function Panel({ password, onLogout }: { password: string; onLogout: () => void 
   const [ip, setIp] = useState<string | null>(null);
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
   const [forumUrl, setForumUrl] = useState<string | null>(null);
+  const [adminApplyUrl, setAdminApplyUrl] = useState<string | null>(null);
+  const [leaderApplyUrl, setLeaderApplyUrl] = useState<string | null>(null);
+  const [restoreApplyUrl, setRestoreApplyUrl] = useState<string | null>(null);
   const [newsForm, setNewsForm] = useState({ title: "", description: "", tag: "Новость", icon: "Sparkles", news_date: "" });
   const [reviewForm, setReviewForm] = useState({ name: "", role: "", text: "", rating: 5 });
   const [editingNewsId, setEditingNewsId] = useState<number | null>(null);
@@ -83,6 +86,9 @@ function Panel({ password, onLogout }: { password: string; onLogout: () => void 
           server_ip: ip ?? data?.settings.server_ip ?? "",
           download_url: downloadUrl ?? data?.settings.download_url ?? "",
           forum_url: forumUrl ?? data?.settings.forum_url ?? "",
+          admin_apply_url: adminApplyUrl ?? data?.settings.admin_apply_url ?? "",
+          leader_apply_url: leaderApplyUrl ?? data?.settings.leader_apply_url ?? "",
+          restore_apply_url: restoreApplyUrl ?? data?.settings.restore_apply_url ?? "",
         }),
       "Настройки сохранены",
     );
@@ -177,6 +183,27 @@ function Panel({ password, onLogout }: { password: string; onLogout: () => void 
             <Input
               value={forumUrl ?? data?.settings.forum_url ?? ""}
               onChange={(e) => setForumUrl(e.target.value)}
+              placeholder="https://..."
+              className={fieldClass}
+            />
+            <label className="text-neutral-400 text-sm">Ссылка на заявку на администратора</label>
+            <Input
+              value={adminApplyUrl ?? data?.settings.admin_apply_url ?? ""}
+              onChange={(e) => setAdminApplyUrl(e.target.value)}
+              placeholder="https://..."
+              className={fieldClass}
+            />
+            <label className="text-neutral-400 text-sm">Ссылка на заявку на лидера</label>
+            <Input
+              value={leaderApplyUrl ?? data?.settings.leader_apply_url ?? ""}
+              onChange={(e) => setLeaderApplyUrl(e.target.value)}
+              placeholder="https://..."
+              className={fieldClass}
+            />
+            <label className="text-neutral-400 text-sm">Ссылка на заявку на восстановление</label>
+            <Input
+              value={restoreApplyUrl ?? data?.settings.restore_apply_url ?? ""}
+              onChange={(e) => setRestoreApplyUrl(e.target.value)}
               placeholder="https://..."
               className={fieldClass}
             />

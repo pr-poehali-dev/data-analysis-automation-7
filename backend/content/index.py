@@ -109,7 +109,7 @@ def handler(event: dict, context) -> dict:
             return respond(200, {'ok': True})
 
         if method == 'PUT' and action == 'settings':
-            for key in ('server_ip', 'download_url', 'forum_url'):
+            for key in ('server_ip', 'download_url', 'forum_url', 'admin_apply_url', 'leader_apply_url', 'restore_apply_url'):
                 if key in body:
                     cur.execute(
                         f"INSERT INTO {SCHEMA}.settings (key, value) VALUES ({esc(key)}, {esc(body[key])}) "
