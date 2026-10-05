@@ -40,6 +40,9 @@ export default function Hero() {
           Вас ждёт увлекательный игровой процесс с элементами ролевой игры.<br />
           Территории, бои, покупка домов и машин — заходи и покажи, на что ты способен!
         </p>
+        <p className="text-white/80 text-sm uppercase tracking-widest mb-6">
+          IP сервера: <span className="text-white font-bold select-all">195.18.27.226:2498</span>
+        </p>
         <div className="flex items-center gap-6 flex-wrap">
           <a
             href="https://drive.usercontent.google.com/download?id=1IDS9D_kPUWDM-4fhTz5CsJazFo3SXkXF&export=download&authuser=0&confirm=t&uuid=5c2c5089-0590-445d-bc4e-b5045a389e89&at=AMrWOn1POhNzuaOtllY2wnngjqtm%3A1791194748645"
