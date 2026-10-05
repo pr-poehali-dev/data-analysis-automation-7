@@ -1,27 +1,10 @@
 import Icon from "@/components/ui/icon";
-
-const reviews = [
-  {
-    name: "Артём В.",
-    role: "Игрок с 2024 года",
-    text: "Играю уже второй год — сервер живой, админы адекватные, а фракционка реально затягивает. Один из лучших RP-проектов, что я пробовал.",
-    rating: 5,
-  },
-  {
-    name: "Мария К.",
-    role: "Лидер фракции",
-    text: "Отличное комьюнити и постоянные обновления. Система недвижимости и бизнесов сделана с душой, скучать не приходится.",
-    rating: 5,
-  },
-  {
-    name: "Данил С.",
-    role: "Игрок с 2025 года",
-    text: "Понравилась атмосфера Майами — графика, музыка, детали города. Заявку на админа рассмотрели быстро и честно.",
-    rating: 4,
-  },
-];
+import { useContent } from "@/lib/content";
 
 export default function Reviews() {
+  const { data } = useContent();
+  const reviews = data?.reviews ?? [];
+
   return (
     <div className="bg-neutral-950 px-6 py-24 flex flex-col items-center">
       <p className="text-red-500 uppercase tracking-widest text-xs mb-4 flex items-center gap-2">
@@ -40,7 +23,7 @@ export default function Reviews() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl">
         {reviews.map((review) => (
           <div
-            key={review.name}
+            key={review.id}
             className="relative bg-neutral-900 border border-neutral-800 p-6 flex flex-col gap-4 hover:border-neutral-600 transition-all duration-300"
           >
             <Icon name="Quote" size={28} className="text-red-500/40" />

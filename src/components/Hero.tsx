@@ -1,7 +1,10 @@
 import { useScroll, useTransform, motion } from "framer-motion";
 import { useRef } from "react";
+import { useContent } from "@/lib/content";
 
 export default function Hero() {
+  const { data } = useContent();
+  const serverIp = data?.settings.server_ip ?? "195.18.27.226:2498";
   const container = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: container,
@@ -41,7 +44,7 @@ export default function Hero() {
           Территории, бои, покупка домов и машин — заходи и покажи, на что ты способен!
         </p>
         <p className="text-white/80 text-sm uppercase tracking-widest mb-6">
-          IP сервера: <span className="text-white font-bold select-all">195.18.27.226:2498</span>
+          IP сервера: <span className="text-white font-bold select-all">{serverIp}</span>
         </p>
         <div className="flex items-center gap-6 flex-wrap">
           <a

@@ -1,0 +1,1 @@
+{"tests": [{"name": "Get site content", "method": "GET", "path": "/", "expectedStatus": 200, "expectedBody": {"settings": {"server_ip": "string"}}, "bodyMatcher": "partial"}, {"name": "Reject unauthorized add", "method": "POST", "path": "/?action=news", "body": {"title": "x"}, "expectedStatus": 401}]}

@@ -1,41 +1,18 @@
 import Icon from "@/components/ui/icon";
+import { useContent } from "@/lib/content";
 
-const news = [
-  {
-    date: "05.05.2024",
-    title: "Открытие проекта Maiami RP",
-    description: "Сервер официально открыл свои двери для игроков! Добро пожаловать в город, где начинается твоя история.",
-    icon: "Rocket",
-    tag: "Открытие",
-    tagColor: "text-green-400 border-green-400",
-  },
-  {
-    date: "05.08.2026",
-    title: "Обновление 3.2: новые фракции",
-    description: "Добавлены две новые государственные фракции и обновлена система назначения лидеров.",
-    icon: "Sparkles",
-    tag: "Обновление",
-    tagColor: "text-red-400 border-red-400",
-  },
-  {
-    date: "28.07.2026",
-    title: "Новая система недвижимости",
-    description: "Переработана покупка домов и вилл: добавлены аукционы и персональная охрана territorий.",
-    icon: "Home",
-    tag: "Фича",
-    tagColor: "text-yellow-400 border-yellow-400",
-  },
-  {
-    date: "15.07.2026",
-    title: "Ивент выходного дня",
-    description: "В эти выходные — гонки на побережье с призами для победителей. Регистрация на форуме.",
-    icon: "Trophy",
-    tag: "Ивент",
-    tagColor: "text-blue-400 border-blue-400",
-  },
-];
+const TAG_COLORS: Record<string, string> = {
+  Открытие: "text-green-400 border-green-400",
+  Обновление: "text-red-400 border-red-400",
+  Фича: "text-yellow-400 border-yellow-400",
+  Ивент: "text-blue-400 border-blue-400",
+};
+const DEFAULT_TAG_COLOR = "text-purple-400 border-purple-400";
 
 export default function News() {
+  const { data } = useContent();
+  const news = data?.news ?? [];
+
   return (
     <div className="bg-neutral-950 px-6 py-24 flex flex-col items-center">
       <p className="text-red-500 uppercase tracking-widest text-xs mb-4 flex items-center gap-2">
@@ -54,19 +31,19 @@ export default function News() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-6xl">
         {news.map((item) => (
           <div
-            key={item.title}
+            key={item.id}
             className="relative bg-neutral-900 border border-neutral-800 p-6 flex flex-col gap-4 hover:border-neutral-600 transition-all duration-300"
           >
             <div className="flex justify-between items-start">
               <div className="w-12 h-12 rounded-full bg-neutral-800 flex items-center justify-center">
                 <Icon name={item.icon} size={22} className="text-red-400" />
               </div>
-              <span className={`text-xs uppercase border px-2 py-1 tracking-widest ${item.tagColor}`}>
+              <span className={`text-xs uppercase border px-2 py-1 tracking-widest ${TAG_COLORS[item.tag] ?? DEFAULT_TAG_COLOR}`}>
                 {item.tag}
               </span>
             </div>
 
-            <p className="text-neutral-500 text-xs uppercase tracking-widest">{item.date}</p>
+            <p className="text-neutral-500 text-xs uppercase tracking-widest">{item.news_date}</p>
 
             <h3 className="text-white font-black text-xl uppercase leading-tight">
               {item.title}
