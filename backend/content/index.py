@@ -92,6 +92,22 @@ def handler(event: dict, context) -> dict:
             )
             return respond(200, {'id': cur.fetchone()[0]})
 
+        if method == 'PUT' and action == 'news':
+            cur.execute(
+                f"UPDATE {SCHEMA}.news SET title = {esc(body.get('title', ''))}, description = {esc(body.get('description', ''))}, "
+                f"tag = {esc(body.get('tag') or 'Новость')}, icon = {esc(body.get('icon') or 'Sparkles')}, "
+                f"news_date = {esc(body.get('news_date', ''))} WHERE id = {int(params.get('id', 0))}"
+            )
+            return respond(200, {'ok': True})
+
+        if method == 'PUT' and action == 'review':
+            rating = max(1, min(5, int(body.get('rating') or 5)))
+            cur.execute(
+                f"UPDATE {SCHEMA}.reviews SET name = {esc(body.get('name', ''))}, role = {esc(body.get('role', ''))}, "
+                f"text = {esc(body.get('text', ''))}, rating = {rating} WHERE id = {int(params.get('id', 0))}"
+            )
+            return respond(200, {'ok': True})
+
         if method == 'PUT' and action == 'settings':
             cur.execute(
                 f"INSERT INTO {SCHEMA}.settings (key, value) VALUES ('server_ip', {esc(body.get('server_ip', ''))}) "

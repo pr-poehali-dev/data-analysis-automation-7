@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import Icon from "@/components/ui/icon";
 import { useToast } from "@/hooks/use-toast";
-import { adminRequest, CONTENT_KEY, CONTENT_URL, useContent } from "@/lib/content";
+import { adminRequest, CONTENT_KEY, CONTENT_URL, useContent, type NewsItem, type ReviewItem } from "@/lib/content";
 
 const STORAGE_KEY = "admin-password";
 const TAGS = ["Новость", "Обновление", "Фича", "Ивент", "Открытие"];
@@ -61,6 +61,8 @@ function Panel({ password, onLogout }: { password: string; onLogout: () => void 
   const [ip, setIp] = useState<string | null>(null);
   const [newsForm, setNewsForm] = useState({ title: "", description: "", tag: "Новость", icon: "Sparkles", news_date: "" });
   const [reviewForm, setReviewForm] = useState({ name: "", role: "", text: "", rating: 5 });
+  const [editingNewsId, setEditingNewsId] = useState<number | null>(null);
+  const [editingReviewId, setEditingReviewId] = useState<number | null>(null);
 
   const run = async (fn: () => Promise<unknown>, successText: string) => {
     try {
@@ -75,17 +77,52 @@ function Panel({ password, onLogout }: { password: string; onLogout: () => void 
   const saveIp = () =>
     run(() => adminRequest("PUT", "settings", password, { server_ip: ip ?? data?.settings.server_ip ?? "" }), "IP сохранён");
 
-  const addNews = () =>
-    run(async () => {
-      await adminRequest("POST", "news", password, newsForm);
-      setNewsForm({ ...newsForm, title: "", description: "", news_date: "" });
-    }, "Новость добавлена");
+  const emptyNews = { title: "", description: "", tag: "Новость", icon: "Sparkles", news_date: "" };
+  const emptyReview = { name: "", role: "", text: "", rating: 5 };
 
-  const addReview = () =>
+  const saveNews = () =>
     run(async () => {
-      await adminRequest("POST", "review", password, reviewForm);
-      setReviewForm({ name: "", role: "", text: "", rating: 5 });
-    }, "Отзыв добавлен");
+      if (editingNewsId) {
+        await adminRequest("PUT", "news", password, newsForm, editingNewsId);
+      } else {
+        await adminRequest("POST", "news", password, newsForm);
+      }
+      setNewsForm(emptyNews);
+      setEditingNewsId(null);
+    }, editingNewsId ? "Новость обновлена" : "Новость добавлена");
+
+  const saveReview = () =>
+    run(async () => {
+      if (editingReviewId) {
+        await adminRequest("PUT", "review", password, reviewForm, editingReviewId);
+      } else {
+        await adminRequest("POST", "review", password, reviewForm);
+      }
+      setReviewForm(emptyReview);
+      setEditingReviewId(null);
+    }, editingReviewId ? "Отзыв обновлён" : "Отзыв добавлен");
+
+  const startEditNews = (n: NewsItem) => {
+    setEditingNewsId(n.id);
+    setNewsForm({ title: n.title, description: n.description, tag: n.tag, icon: n.icon, news_date: n.news_date });
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const startEditReview = (r: ReviewItem) => {
+    setEditingReviewId(r.id);
+    setReviewForm({ name: r.name, role: r.role, text: r.text, rating: r.rating });
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const cancelNews = () => {
+    setEditingNewsId(null);
+    setNewsForm(emptyNews);
+  };
+
+  const cancelReview = () => {
+    setEditingReviewId(null);
+    setReviewForm(emptyReview);
+  };
 
   const removeItem = (action: "news" | "review", id: number) => {
     if (!window.confirm("Удалить запись?")) return;
@@ -150,13 +187,20 @@ function Panel({ password, onLogout }: { password: string; onLogout: () => void 
             placeholder="Текст новости"
             className={fieldClass}
           />
-          <Button
-            onClick={addNews}
-            disabled={!newsForm.title || !newsForm.description || !newsForm.news_date}
-            className="bg-red-600 hover:bg-red-700 text-white self-start"
-          >
-            Добавить новость
-          </Button>
+          <div className="flex gap-3">
+            <Button
+              onClick={saveNews}
+              disabled={!newsForm.title || !newsForm.description || !newsForm.news_date}
+              className="bg-red-600 hover:bg-red-700 text-white"
+            >
+              {editingNewsId ? "Сохранить изменения" : "Добавить новость"}
+            </Button>
+            {editingNewsId && (
+              <Button onClick={cancelNews} variant="outline" className="bg-transparent border-neutral-700 text-white hover:bg-neutral-800 hover:text-white">
+                Отмена
+              </Button>
+            )}
+          </div>
 
           <div className="flex flex-col gap-2 pt-4 border-t border-neutral-800">
             {data?.news.map((n) => (
@@ -165,9 +209,15 @@ function Panel({ password, onLogout }: { password: string; onLogout: () => void 
                   <p className="font-bold truncate">{n.title}</p>
                   <p className="text-neutral-400 text-xs">{n.news_date} · {n.tag}</p>
                 </div>
-                <Button onClick={() => removeItem("news", n.id)} variant="ghost" size="icon" className="text-red-400 hover:text-red-300 hover:bg-neutral-700 shrink-0">
-                  <Icon name="Trash2" size={18} />
-                </Button>
+                <div className="flex shrink-0">
+                  <Button onClick={() => startEditNews(n)} variant="ghost" size="sm" className="text-blue-400 hover:text-blue-300 hover:bg-neutral-700">
+                    <Icon name="Pencil" size={16} className="mr-1" />
+                    Редактировать
+                  </Button>
+                  <Button onClick={() => removeItem("news", n.id)} variant="ghost" size="icon" className="text-red-400 hover:text-red-300 hover:bg-neutral-700">
+                    <Icon name="Trash2" size={18} />
+                  </Button>
+                </div>
               </div>
             ))}
           </div>
@@ -198,13 +248,20 @@ function Panel({ password, onLogout }: { password: string; onLogout: () => void 
             placeholder="Текст отзыва"
             className={fieldClass}
           />
-          <Button
-            onClick={addReview}
-            disabled={!reviewForm.name || !reviewForm.text}
-            className="bg-red-600 hover:bg-red-700 text-white self-start"
-          >
-            Добавить отзыв
-          </Button>
+          <div className="flex gap-3">
+            <Button
+              onClick={saveReview}
+              disabled={!reviewForm.name || !reviewForm.text}
+              className="bg-red-600 hover:bg-red-700 text-white"
+            >
+              {editingReviewId ? "Сохранить изменения" : "Добавить отзыв"}
+            </Button>
+            {editingReviewId && (
+              <Button onClick={cancelReview} variant="outline" className="bg-transparent border-neutral-700 text-white hover:bg-neutral-800 hover:text-white">
+                Отмена
+              </Button>
+            )}
+          </div>
 
           <div className="flex flex-col gap-2 pt-4 border-t border-neutral-800">
             {data?.reviews.map((r) => (
@@ -213,9 +270,15 @@ function Panel({ password, onLogout }: { password: string; onLogout: () => void 
                   <p className="font-bold truncate">{r.name} · {r.rating}/5</p>
                   <p className="text-neutral-400 text-xs truncate">{r.text}</p>
                 </div>
-                <Button onClick={() => removeItem("review", r.id)} variant="ghost" size="icon" className="text-red-400 hover:text-red-300 hover:bg-neutral-700 shrink-0">
-                  <Icon name="Trash2" size={18} />
-                </Button>
+                <div className="flex shrink-0">
+                  <Button onClick={() => startEditReview(r)} variant="ghost" size="sm" className="text-blue-400 hover:text-blue-300 hover:bg-neutral-700">
+                    <Icon name="Pencil" size={16} className="mr-1" />
+                    Редактировать
+                  </Button>
+                  <Button onClick={() => removeItem("review", r.id)} variant="ghost" size="icon" className="text-red-400 hover:text-red-300 hover:bg-neutral-700">
+                    <Icon name="Trash2" size={18} />
+                  </Button>
+                </div>
               </div>
             ))}
           </div>
