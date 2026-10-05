@@ -109,10 +109,12 @@ def handler(event: dict, context) -> dict:
             return respond(200, {'ok': True})
 
         if method == 'PUT' and action == 'settings':
-            cur.execute(
-                f"INSERT INTO {SCHEMA}.settings (key, value) VALUES ('server_ip', {esc(body.get('server_ip', ''))}) "
-                f"ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value"
-            )
+            for key in ('server_ip', 'download_url', 'forum_url'):
+                if key in body:
+                    cur.execute(
+                        f"INSERT INTO {SCHEMA}.settings (key, value) VALUES ({esc(key)}, {esc(body[key])}) "
+                        f"ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value"
+                    )
             return respond(200, {'ok': True})
 
         if method == 'DELETE' and action in ('news', 'review'):

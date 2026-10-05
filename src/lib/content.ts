@@ -23,7 +23,7 @@ export interface ReviewItem {
 export interface SiteContent {
   news: NewsItem[];
   reviews: ReviewItem[];
-  settings: { server_ip?: string };
+  settings: { server_ip?: string; download_url?: string; forum_url?: string };
 }
 
 export const CONTENT_KEY = ["site-content"];

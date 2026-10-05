@@ -5,6 +5,8 @@ import { useContent } from "@/lib/content";
 export default function Hero() {
   const { data } = useContent();
   const serverIp = data?.settings.server_ip ?? "195.18.27.226:2498";
+  const downloadUrl = data?.settings.download_url ?? "#";
+  const forumUrl = data?.settings.forum_url ?? "#";
   const container = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: container,
@@ -48,7 +50,7 @@ export default function Hero() {
         </p>
         <div className="flex items-center gap-6 flex-wrap">
           <a
-            href="https://drive.usercontent.google.com/download?id=1IDS9D_kPUWDM-4fhTz5CsJazFo3SXkXF&export=download&authuser=0&confirm=t&uuid=5c2c5089-0590-445d-bc4e-b5045a389e89&at=AMrWOn1POhNzuaOtllY2wnngjqtm%3A1791194748645"
+            href={downloadUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="bg-red-600 hover:bg-red-700 text-white font-bold uppercase tracking-widest px-10 py-4 text-sm transition-all duration-300 cursor-pointer inline-block"
@@ -56,7 +58,7 @@ export default function Hero() {
             Присоединяйся к нам
           </a>
           <a
-            href="https://maiami-gta-forum.sampproject.ru/index.php"
+            href={forumUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-400 hover:text-blue-300 font-bold uppercase tracking-widest text-sm transition-colors duration-300"

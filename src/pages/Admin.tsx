@@ -59,6 +59,8 @@ function Panel({ password, onLogout }: { password: string; onLogout: () => void 
   const { toast } = useToast();
 
   const [ip, setIp] = useState<string | null>(null);
+  const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
+  const [forumUrl, setForumUrl] = useState<string | null>(null);
   const [newsForm, setNewsForm] = useState({ title: "", description: "", tag: "Новость", icon: "Sparkles", news_date: "" });
   const [reviewForm, setReviewForm] = useState({ name: "", role: "", text: "", rating: 5 });
   const [editingNewsId, setEditingNewsId] = useState<number | null>(null);
@@ -74,8 +76,16 @@ function Panel({ password, onLogout }: { password: string; onLogout: () => void 
     }
   };
 
-  const saveIp = () =>
-    run(() => adminRequest("PUT", "settings", password, { server_ip: ip ?? data?.settings.server_ip ?? "" }), "IP сохранён");
+  const saveSettings = () =>
+    run(
+      () =>
+        adminRequest("PUT", "settings", password, {
+          server_ip: ip ?? data?.settings.server_ip ?? "",
+          download_url: downloadUrl ?? data?.settings.download_url ?? "",
+          forum_url: forumUrl ?? data?.settings.forum_url ?? "",
+        }),
+      "Настройки сохранены",
+    );
 
   const emptyNews = { title: "", description: "", tag: "Новость", icon: "Sparkles", news_date: "" };
   const emptyReview = { name: "", role: "", text: "", rating: 5 };
@@ -147,16 +157,33 @@ function Panel({ password, onLogout }: { password: string; onLogout: () => void 
         </div>
 
         <section className="bg-neutral-900 border border-neutral-800 p-6 flex flex-col gap-4">
-          <h2 className="font-bold text-xl uppercase">IP сервера</h2>
-          <div className="flex gap-3 flex-wrap">
+          <h2 className="font-bold text-xl uppercase">Настройки сайта</h2>
+          <div className="flex flex-col gap-3">
+            <label className="text-neutral-400 text-sm">IP сервера</label>
             <Input
               value={ip ?? data?.settings.server_ip ?? ""}
               onChange={(e) => setIp(e.target.value)}
               placeholder="195.18.27.226:2498"
               className={`${fieldClass} max-w-xs`}
             />
-            <Button onClick={saveIp} className="bg-red-600 hover:bg-red-700 text-white">Сохранить</Button>
+            <label className="text-neutral-400 text-sm">Ссылка на скачивание игры</label>
+            <Input
+              value={downloadUrl ?? data?.settings.download_url ?? ""}
+              onChange={(e) => setDownloadUrl(e.target.value)}
+              placeholder="https://..."
+              className={fieldClass}
+            />
+            <label className="text-neutral-400 text-sm">Ссылка на форум</label>
+            <Input
+              value={forumUrl ?? data?.settings.forum_url ?? ""}
+              onChange={(e) => setForumUrl(e.target.value)}
+              placeholder="https://..."
+              className={fieldClass}
+            />
           </div>
+          <Button onClick={saveSettings} className="bg-red-600 hover:bg-red-700 text-white self-start">
+            Сохранить
+          </Button>
         </section>
 
         <section className="bg-neutral-900 border border-neutral-800 p-6 flex flex-col gap-4">
